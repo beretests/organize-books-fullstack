@@ -13,11 +13,9 @@ async function fetchGitHubUsers() {
 
 const GitHubUsersPage = async () => {
   const users = await fetchGitHubUsers();
-  // console.log(users);
   return (
     <div className="overflow-x-auto">
       <table className="table">
-        {/* head */}
         <thead>
           <tr>
             <th>Name</th>
