@@ -11,7 +11,6 @@ async function getBooks() {
 }
 
 const Books = () => {
-  // const books = await getBooks();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
@@ -32,7 +31,6 @@ const Books = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(query);
     setLoading(true);
     const res = await fetch(`api/books/search?query=${query}`);
     const books = await res.json();
@@ -67,7 +65,7 @@ const Books = () => {
         <div key={book.id}>
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
-              <img src={book.img} width="200" height="150" />
+              <img src={book.image} width="200" height="150" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{book.id}</h2>

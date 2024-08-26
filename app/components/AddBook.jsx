@@ -9,7 +9,6 @@ const AddBook = ({ refreshBooks }) => {
 
   const handleSubmitNewBook = async (e) => {
     e.preventDefault();
-    // console.log(newBookTitle);
 
     const res = await fetch(`/api/books`, {
       method: "POST",
@@ -19,9 +18,7 @@ const AddBook = ({ refreshBooks }) => {
       body: JSON.stringify({
         title: newBookTitle,
         link: newBookLink,
-        img: newBookImage,
-        // link: "https://www.amazon.com/dp/B0979MGJ5J",
-        // img: "https://via.placeholder.com/600/92c952",
+        image: newBookImage,
       }),
     });
 
