@@ -11,16 +11,18 @@ async function getBooks() {
 }
 
 const Books = () => {
-  // const books = await getBooks();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
 
+  const fetchBooks = async () => {
+    const res = await fetch("/api/books");
+    const books = await res.json();
+    setBooks(books);
+    setLoading(false);
+  };
   useEffect(() => {
-    getBooks().then((books) => {
-      setBooks(books);
-      setLoading(false);
-    });
+    fetchBooks();
   }, []);
 
   if (loading) {
@@ -29,12 +31,18 @@ const Books = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(query);
     setLoading(true);
     const res = await fetch(`api/books/search?query=${query}`);
     const books = await res.json();
     setBooks(books);
     setLoading(false);
+  };
+
+  const deleteBook = async (id) => {
+    const res = await fetch(`/api/books/${id}`, {
+      method: "DELETE",
+    });
+    fetchBooks();
   };
 
   return (
@@ -52,12 +60,12 @@ const Books = () => {
           Search
         </button>
       </form>
-      <AddBook />
+      <AddBook refreshBooks={fetchBooks} />
       {books.map((book) => (
         <div key={book.id}>
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
-              <img src={book.img} width="200" height="150" />
+              <img src={book.image} width="200" height="150" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{book.id}</h2>
@@ -66,7 +74,12 @@ const Books = () => {
                 <Link href={book.link} className="btn btn-primary">
                   See in Amazon
                 </Link>
-                <button className="btn btn-error">Delete</button>
+                <button
+                  className="btn btn-error"
+                  onClick={() => deleteBook(book.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
