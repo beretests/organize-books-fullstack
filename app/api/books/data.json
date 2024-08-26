@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "MERN Stack",
+    "link": "https://www.amazon.com/Beginning-MERN-Stack-MongoDB-Express/dp/B0979MGJ5J",
+    "img": "https://a.media-amazon.com/images/I/516jKYpOAiS._AC_UY436_FMwebp_QL65_.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Beginning GraphQL",
+    "link": "https://www.amazon.com/Beginning-GraphQL-React-NodeJS-Apollo/dp/B0BXMRB5VF",
+    "img": "https://a.media-amazon.com/images/I/618MMF5kCAL._AC_UY436_FMwebp_QL65_.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Beginning React Hooks",
+    "link": "https://www.amazon.com/Beginning-React-incl-Redux-Hooks/dp/9811480265",
+    "img": "https://a.media-amazon.com/images/I/61YEFO4elGL._AC_UY436_FMwebp_QL65_.jpg"
+  }
+]
