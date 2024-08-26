@@ -16,11 +16,14 @@ const Books = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
 
+  const fetchBooks = async () => {
+    const res = await fetch("/api/books");
+    const books = await res.json();
+    setBooks(books);
+    setLoading(false);
+  };
   useEffect(() => {
-    getBooks().then((books) => {
-      setBooks(books);
-      setLoading(false);
-    });
+    fetchBooks();
   }, []);
 
   if (loading) {
@@ -35,6 +38,13 @@ const Books = () => {
     const books = await res.json();
     setBooks(books);
     setLoading(false);
+  };
+
+  const deleteBook = async (id) => {
+    const res = await fetch(`/api/books/${id}`, {
+      method: "DELETE",
+    });
+    fetchBooks();
   };
 
   return (
@@ -52,7 +62,7 @@ const Books = () => {
           Search
         </button>
       </form>
-      <AddBook />
+      <AddBook refreshBooks={fetchBooks} />
       {books.map((book) => (
         <div key={book.id}>
           <div className="card w-96 bg-base-100 shadow-xl">
@@ -66,7 +76,12 @@ const Books = () => {
                 <Link href={book.link} className="btn btn-primary">
                   See in Amazon
                 </Link>
-                <button className="btn btn-error">Delete</button>
+                <button
+                  className="btn btn-error"
+                  onClick={() => deleteBook(book.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
